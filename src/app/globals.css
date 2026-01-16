@@ -1,0 +1,376 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+
+    --primary: 142.1 76.2% 36.3%;
+    --primary-foreground: 355.7 100% 97.3%;
+
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 142.1 76.2% 36.3%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 20 14.3% 4.1%;
+    --foreground: 0 0% 95%;
+
+    --card: 24 9.8% 10%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 0 0% 9%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 142.1 70.6% 45.3%;
+    --primary-foreground: 144.9 80.4% 10%;
+
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 12 6.5% 15.1%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 85.7% 97.3%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 142.4 71.8% 29.2%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Initial page load fade-in animation (for above-the-fold content) */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-fade-in-delay-1 {
+  opacity: 0;
+  animation: fadeIn 0.6s ease-out 0.15s forwards;
+}
+
+.animate-fade-in-delay-2 {
+  opacity: 0;
+  animation: fadeIn 0.6s ease-out 0.3s forwards;
+}
+
+.animate-fade-in-delay-3 {
+  opacity: 0;
+  animation: fadeIn 0.6s ease-out 0.45s forwards;
+}
+
+/* Scroll reveal animation (for below-the-fold content) */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* HeroCards background shadow - RTL adjusted */
+.shadow-effect {
+  position: absolute;
+  background: hsl(var(--primary) / 0%);
+  border-radius: 24px;
+  rotate: 35deg;
+  z-index: -1;
+  width: 260px;
+  top: 200px;
+  height: 400px;
+  filter: blur(150px);
+  will-change: transform;
+  animation: shadow-slide infinite 4s linear alternate;
+}
+
+@keyframes shadow-slide {
+  from {
+    background: hsl(var(--primary) / 20%);
+    left: 460px;
+  }
+  to {
+    background: hsl(var(--primary) / 80%);
+    left: 160px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .shadow-effect {
+    top: 70px;
+  }
+
+  @keyframes shadow-slide {
+    from {
+      background: hsl(var(--primary) / 20%);
+      left: 460px;
+    }
+    to {
+      background: hsl(var(--primary) / 50%);
+      left: 160px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .shadow-effect {
+    top: 70px;
+    width: 100px;
+    height: 350px;
+    filter: blur(60px);
+  }
+
+  @keyframes shadow-slide {
+    from {
+      background: hsl(var(--primary) / 20%);
+      left: 280px;
+    }
+    to {
+      background: hsl(var(--primary) / 30%);
+      left: 100px;
+    }
+  }
+}
+
+/* Hover lift effect for cards */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -8px hsl(var(--primary) / 15%);
+}
+
+/* Gradient text animation */
+.gradient-text-animate {
+  background-size: 200% 200%;
+  animation: gradientMove 3s ease infinite;
+}
+
+@keyframes gradientMove {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Pulse glow effect for buttons */
+.pulse-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.pulse-glow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, hsl(var(--primary-foreground) / 20%), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.pulse-glow:hover::after {
+  transform: translateX(100%);
+}
+
+/* Icon hover effect */
+.icon-hover {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.icon-hover:hover {
+  transform: scale(1.15);
+  color: hsl(var(--primary));
+}
+
+/* Statistics counter style */
+.stat-number {
+  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(197 71% 52%) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Section divider */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, hsl(var(--border)), transparent);
+}
+
+/* Glow border on hover */
+.glow-border {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.glow-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, hsl(var(--primary) / 0%), hsl(var(--primary) / 0%));
+  z-index: -1;
+  transition: background 0.3s ease;
+}
+
+.glow-border:hover::before {
+  background: linear-gradient(135deg, hsl(var(--primary) / 30%), hsl(var(--primary) / 10%));
+}
+
+/* Hero background */
+.hero-bg {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 80% 50% at 80% 20%, hsl(var(--primary) / 25%) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 10% 80%, hsl(197 71% 52% / 20%) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 30% at 50% 50%, hsl(var(--primary) / 8%) 0%, transparent 60%);
+}
+
+/* Hero grid pattern overlay */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(hsl(var(--primary) / 8%) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--primary) / 8%) 1px, transparent 1px);
+  background-size: 50px 50px;
+  mask-image: radial-gradient(ellipse 80% 60% at 70% 30%, black 20%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 70% 30%, black 20%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Floating shapes for hero */
+.hero-shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-shape-1 {
+  width: 500px;
+  height: 500px;
+  background: hsl(var(--primary) / 35%);
+  top: -150px;
+  right: 5%;
+  animation: float 8s ease-in-out infinite;
+}
+
+.hero-shape-2 {
+  width: 400px;
+  height: 400px;
+  background: hsl(197 71% 52% / 30%);
+  bottom: -100px;
+  left: 0%;
+  animation: float 10s ease-in-out infinite reverse;
+}
+
+.hero-shape-3 {
+  width: 250px;
+  height: 250px;
+  background: hsl(var(--primary) / 25%);
+  top: 40%;
+  left: 30%;
+  animation: float 12s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-30px) scale(1.08);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-bg {
+    background:
+      radial-gradient(ellipse 100% 60% at 80% 10%, hsl(var(--primary) / 30%) 0%, transparent 50%),
+      radial-gradient(ellipse 80% 50% at 10% 90%, hsl(197 71% 52% / 25%) 0%, transparent 50%);
+  }
+
+  .hero-shape-1 {
+    width: 300px;
+    height: 300px;
+    top: -80px;
+    right: -15%;
+  }
+
+  .hero-shape-2 {
+    width: 250px;
+    height: 250px;
+    bottom: -50px;
+    left: -10%;
+  }
+
+  .hero-shape-3 {
+    width: 180px;
+    height: 180px;
+  }
+
+  .hero-grid {
+    background-size: 40px 40px;
+    mask-image: radial-gradient(ellipse 100% 80% at 50% 30%, black 10%, transparent 60%);
+    -webkit-mask-image: radial-gradient(ellipse 100% 80% at 50% 30%, black 10%, transparent 60%);
+  }
+}
