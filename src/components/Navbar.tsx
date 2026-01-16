@@ -60,8 +60,8 @@ export const Navbar = () => {
               href="/"
               className="font-bold text-xl flex items-center gap-2"
             >
-              <Logo size={28} />
               <span>DigitalHive</span>
+              <Logo size={28} />
             </a>
           </NavigationMenuItem>
 
@@ -75,8 +75,8 @@ export const Navbar = () => {
               <SheetContent side="right">
                 <SheetHeader>
                   <SheetTitle className="font-bold text-xl flex items-center gap-2 justify-center">
-                    <Logo size={24} />
                     <span>DigitalHive</span>
+                    <Logo size={24} />
                   </SheetTitle>
                 </SheetHeader>
                 <nav className="flex flex-col justify-center items-center gap-2 mt-4">
