@@ -50,7 +50,7 @@ const routeList: RouteProps[] = [
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
-    <header className="sticky border-b-[1px] top-0 z-40 w-full border-b-slate-700 bg-background animate-fade-in">
+    <header className="sticky border-b-[1px] top-0 z-40 w-full border-b-border/50 bg-background/95 backdrop-blur-md animate-fade-in">
       <NavigationMenu className="mx-auto">
         <NavigationMenuList className="container h-14 px-4 w-screen flex flex-row-reverse justify-between items-center">
           {/* לוגו בצד ימין - עם flex-row-reverse מופיע ראשון מימין */}
@@ -68,36 +68,54 @@ export const Navbar = () => {
           {/* תפריט מובייל */}
           <span className="flex md:hidden">
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
-              <SheetTrigger className="px-2" aria-label="אייקון תפריט">
-                <Menu className="flex md:hidden h-5 w-5" />
+              <SheetTrigger
+                className="p-2 rounded-lg hover:bg-muted/50 transition-colors"
+                aria-label="אייקון תפריט"
+              >
+                <Menu className="h-5 w-5" />
               </SheetTrigger>
 
-              <SheetContent side="right">
-                <SheetHeader>
-                  <SheetTitle className="font-bold text-xl flex items-center gap-2 justify-center">
-                    <span>DigitalHive</span>
-                    <Logo size={24} />
-                  </SheetTitle>
-                </SheetHeader>
-                <nav className="flex flex-col justify-center items-center gap-2 mt-4">
-                  {routeList.map(({ href, label }: RouteProps) => (
+              <SheetContent side="right" className="w-[300px] p-0 bg-gradient-to-b from-background to-muted/20 border-s-border/30">
+                {/* Header with gradient */}
+                <div className="p-6 pb-4 bg-gradient-to-b from-primary/5 to-transparent">
+                  <SheetHeader>
+                    <SheetTitle className="font-bold text-xl flex items-center gap-2 justify-center">
+                      <span>DigitalHive</span>
+                      <Logo size={24} />
+                    </SheetTitle>
+                  </SheetHeader>
+                </div>
+
+                {/* Divider */}
+                <div className="h-px bg-gradient-to-l from-transparent via-border to-transparent mx-4" />
+
+                {/* Navigation links */}
+                <nav className="flex flex-col gap-1 p-4 mt-2">
+                  {routeList.map(({ href, label }: RouteProps, index) => (
                     <a
                       rel="noreferrer noopener"
                       key={label}
                       href={href}
                       onClick={() => setIsOpen(false)}
-                      className={buttonVariants({ variant: "ghost" })}
+                      className="group py-3 px-4 text-lg font-medium text-muted-foreground hover:text-foreground rounded-xl transition-all duration-200 text-right relative overflow-hidden"
+                      style={{ animationDelay: `${index * 50}ms` }}
                     >
-                      {label}
+                      <span className="absolute inset-0 bg-gradient-to-l from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      <span className="relative">{label}</span>
                     </a>
                   ))}
-                  <ContactModal
-                    variant="secondary"
-                    size="default"
-                    className="w-[110px] border"
-                    showIcon={false}
-                  />
                 </nav>
+
+                {/* Bottom CTA */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-background via-background to-transparent">
+                  <ContactModal
+                    variant="default"
+                    size="lg"
+                    className="w-full shadow-lg shadow-primary/20"
+                    showIcon={true}
+                    buttonText="צור קשר"
+                  />
+                </div>
               </SheetContent>
             </Sheet>
           </span>
