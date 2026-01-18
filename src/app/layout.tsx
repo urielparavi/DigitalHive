@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "DigitalHive - סוכנות דיגיטל מובילה",
     description: "בניית אתרים, שיווק דיגיטלי, מיתוג ועיצוב. DigitalHive - הופכים את העסק שלך לדיגיטלי.",
-    images: ["/og-image.png"],
+    images: ["/og-image.jpg"],
   },
   robots: {
     index: true,
