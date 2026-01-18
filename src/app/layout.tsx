@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://digitalhive.co.il"),
+  metadataBase: new URL("https://digitalhive-project.netlify.app"),
   title: "DigitalHive - סוכנות דיגיטל מובילה",
   description: "בניית אתרים, שיווק דיגיטלי, מיתוג ועיצוב. DigitalHive - הופכים את העסק שלך לדיגיטלי.",
   keywords: ["סוכנות דיגיטל", "בניית אתרים", "שיווק דיגיטלי", "SEO", "עיצוב אתרים", "קידום אתרים"],
